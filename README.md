@@ -23,13 +23,14 @@ Setup
 -----
 To set up an ODBC sync for a data table:
 
-1. Make sure the table to sync has a primary key field named "id", whose values are _unique_.
-2. Make sure the table to sync has a `_mod_ts` field which is the modification TimeStamp. The name should strictly match `_mod_ts`.
-3. Add a table occurence (TO) of the table to the `ODBC Sync` file.
-4. Link the TO to the `SyncData` table, matching `id<=>record_id` and allowing creation and deletion in the SyncData file.
-5. Update the `SyncFields` table with a map of your local table and field names with the external table and field names. Don't leave anything blank!
-6. You should now be able to run the `pub - sync ( table )` script, passing the name of your table as a parameter, and your ODBC data source should sync with your local data source!
-7. One final thing - in order for deletion to propagate up to ODBC, you'll need to use the `pub - delete ( table, record_id )` script. You'll have to override any native FileMaker deletion in your solutions with an API call to ODBC Sync's delete.
+1. Set up an ODBC DSN called "FM ODBC Sync" and point it to your external database.
+2. Make sure the table to sync has a primary key field named "id", whose values are _unique_.
+3. Make sure the table to sync has a `_mod_ts` field which is the modification TimeStamp. The name should strictly match `_mod_ts`.
+4. Add a table occurence (TO) of the table to the `ODBC Sync` file.
+5. Link the TO to the `SyncData` table, matching `id<=>record_id` and allowing creation and deletion in the SyncData file.
+6. Update the `SyncFields` table with a map of your local table and field names with the external table and field names. Don't leave anything blank!
+7. You should now be able to run the `pub - sync ( table )` script, passing the name of your table as a parameter, and your ODBC data source should sync with your local data source!
+8. One final thing - in order for deletion to propagate up to ODBC, you'll need to use the `pub - delete ( table, record_id )` script. You'll have to override any native FileMaker deletion in your solutions with an API call to ODBC Sync's delete.
 
 
 Sample SQL Schema
