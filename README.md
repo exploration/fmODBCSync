@@ -32,6 +32,14 @@ To set up an ODBC sync for a data table:
 9. _One final thing_ - in order for deletion to propagate up to ODBC, you'll need to use the `pub - delete ( table, recordID )` script. You'll have to override any native FileMaker deletion in your solutions with an API call to ODBC Sync's delete.
 
 
+Notes
+-----
+Like all things, your database has to conform to some basic assumptions for this to work:
+
+- Your local database table has an `id` field and a `_mod_ts` field.
+- Your remote database has an `external_id` field which will contain the values of the local `id` field.
+
+
 Sample SQL Schema
 -----------------
 Make a table called "people", and use the System DSN "ODBCTest" if you want to try out using this file for sync.
@@ -57,3 +65,8 @@ Here's a sample of what the schema should look like:
     | last_name   | varchar(255) | YES  |     | NULL    |                |
     | email       | varchar(255) | YES  |     | NULL    |                |
     +-------------+--------------+------+-----+---------+----------------+
+
+
+TODO
+----
+- Add automated/semi-automated imports of some kind?
