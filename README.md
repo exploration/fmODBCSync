@@ -1,6 +1,6 @@
 ODBC SYNC
 =========
-Author: Donald Merand
+Author: [Donald Merand](http://github.com/dmerand)
 
 
 The Basic Idea
