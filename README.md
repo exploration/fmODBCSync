@@ -1,6 +1,7 @@
 ODBC SYNC
 =========
-Author: [Donald Merand](http://github.com/dmerand)
+
+Author: [Donald Merand](http://donaldmerand.com)
 
 
 The Basic Idea
@@ -48,11 +49,9 @@ To do this using MySQL on OSX:
 
 1. Set up MySQL. If you have [homebrew](http://mxcl.github.com/homebrew/) installed (do it), you can type `brew install mysql` from the terminal.
 2. Open up the terminal and type `mysql -u root` to open up a MySQL session.
-3. Type `CREATE DATABASE name_of_yer_database DEFAULT CHARACTER SET utf8;`
-    - UTF8 is important because otherwise special/international characters from FileMaker tend to barf on sync.
-4. Type `use name_of_yer_database;` to work with the database you just created.
-5. Type `CREATE TABLE people (id INTEGER AUTO_INCREMENT, external_id VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), PRIMARY KEY(id));`
-    - `external_id` is absolutely required. You can define whether you want to sync any of the other fields in the `SyncFields` table of ODBC Sync.
+3. Type `CREATE DATABASE people;`
+4. Type `use people;`
+5. Type `CREATE TABLE people (id INTEGER AUTO_INCREMENT, external_id INTEGER, first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), PRIMARY KEY(id));`
 6. Open up ODBC Administrator. You may need to download it [here](http://support.apple.com/downloads/ODBC_Administrator_Tool_for_Mac_OS_X).
 7. Set up a System (_not_ a User) DSN called `ODBCTest`, pointing to your MySQL database. You'll need some kind of driver like the [Open Source Driver by Actual Technologies](http://www.actualtech.com/product_opensourcedatabases.php). I'm not going to go into how to do this, but it's pretty easy.
 
