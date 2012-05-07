@@ -78,4 +78,5 @@ Here's a sample of what the schema for `people` should look like:
 TODO
 ----
 - create a version of ODBC sync script that does all updates in ONE BIG ODBC call.
+    - [this](http://www.karlrixon.co.uk/writing/update-multiple-rows-with-different-values-and-a-single-sql-query/) is a good example of the kind of query to run.
 - Add automated/semi-automated imports of some kind?
