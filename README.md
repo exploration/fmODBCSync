@@ -26,7 +26,7 @@ To set up an ODBC sync for a data table:
 1. Set up an ODBC DSN called "FM ODBC Sync" and point it to your external database. See below for details of how to set up a sample.
 2. Make sure the table to sync in FileMaker has a primary key field named "id", whose values are _unique_.
 3. Make sure the table to sync in FileMaker has a `_mod_ts` field which is the modification TimeStamp. The name should strictly match `_mod_ts`.
-4. Add a table occurence (TO) of the table to the `ODBC Sync` file.
+4. Add a table occurence (TO) of the table to the `ODBC Sync` file, hanging off the `SyncData` table, and allowing creation in `SyncData`.
 5. In the "Relationships" section of the "Manage Databases" dialog, link the TO from step 4 to the `SyncData` table, matching `id<=>record_id` and allowing creation and deletion in the SyncData file.
 6. Create a layout using the TO from step 4 as its context. Name it the same name as the table itself. So if you called the table `people`, the TO should be named `people`, and the layout should be named `people`. Easy right?
 7. Update the `SyncFields` table with a map of your local table and field names with the external table and field names. Don't leave anything blank!
@@ -36,10 +36,15 @@ To set up an ODBC sync for a data table:
 
 Notes
 -----
+
+### Assumptions
 Like all things, your database has to conform to some basic assumptions for this to work:
 
 - Your local database table has an `id` field and a `_mod_ts` field.
 - Your remote database has an `external_id` field which will contain the values of the local `id` field.
+
+### Miscellanea
+I created some sample data in the `sample_data` directory. The data were created using the Ruby `faker` gem (website [here](http://faker.rubyforge.org/)), which you can install with `gem install faker`. Then you can run the fake company script I've included (`ruby fake_company.rb > company_list.tsv`), or modify it to suit your needs.
 
 
 Sample SQL Schema
@@ -52,11 +57,12 @@ To do this using MySQL on OSX:
 2. Open up the terminal and type `mysql -u root` to open up a MySQL session.
 3. Type `CREATE DATABASE people;`
 4. Type `use people;`
-5. Type `CREATE TABLE people (id INTEGER AUTO_INCREMENT, external_id INTEGER, first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), PRIMARY KEY(id));`
+5. Type `CREATE TABLE people (id INTEGER AUTO_INCREMENT, external_id VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), PRIMARY KEY(id)) DEFAULT CHARSET=utf8;`
+    - Alternatively, you could do an sql import of the included sample `ODBCTest.sql` file with `mysql yer_database < data/ODBCTest.sql`.
 6. Open up ODBC Administrator. You may need to download it [here](http://support.apple.com/downloads/ODBC_Administrator_Tool_for_Mac_OS_X).
 7. Set up a System (_not_ a User) DSN called `ODBCTest`, pointing to your MySQL database. You'll need some kind of driver like the [Open Source Driver by Actual Technologies](http://www.actualtech.com/product_opensourcedatabases.php). I'm not going to go into how to do this, but it's pretty easy.
 
-Here's a sample of what the schema should look like:
+Here's a sample of what the schema for `people` should look like:
 
     +-------------+--------------+------+-----+---------+----------------+
     | Field       | Type         | Null | Key | Default | Extra          |
@@ -71,4 +77,5 @@ Here's a sample of what the schema should look like:
 
 TODO
 ----
+- create a version of ODBC sync script that does all updates in ONE BIG ODBC call.
 - Add automated/semi-automated imports of some kind?
