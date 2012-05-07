@@ -1,8 +1,9 @@
-ODBC SYNC
-=========
+fmODBCSync
+==========
 
 Author: [Donald Merand](http://donaldmerand.com)
 
+Automate ODBC synching from FileMaker!
 
 The Basic Idea
 --------------
@@ -36,6 +37,7 @@ To set up an ODBC sync for a data table:
 
 Notes
 -----
+We've yet to deploy this solution. Check here for updates when we do!
 
 ### Assumptions
 Like all things, your database has to conform to some basic assumptions for this to work:
