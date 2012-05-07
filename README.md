@@ -6,9 +6,10 @@ Author: [Donald Merand](http://donaldmerand.com)
 
 The Basic Idea
 --------------
-- External Site Scripting (ESS) is too slow. It can also be error-prone.
+- External Site Scripting (ESS) is slow. It can also be error-prone.
+    - Check `log.fp7` for some benchmarks of the same update using ODBC versus ESS.
 - Using ODBC import is faster/equally fast to download data.
-    - FMP12 also has a "insert from URL" step that might be leveraged in cases where ODBC isn't an option, but an API exists.
+    - FMP12 also has an "insert from URL" step that might be leveraged in cases where ODBC isn't an option, but an API exists.
 - Using "execute SQL" is faster to upload.
     - Use timestamps to only update the stuff that's changed since the last upload.
         - You'll want to have an "external_id" field in your SQL database that corresponds to the local ID in FM. Use that to update.
